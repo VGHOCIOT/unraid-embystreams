@@ -28,6 +28,7 @@ Cond="parse_ini_file('/boot/config/plugins/embystreams/embystreams.cfg')['DISPLA
     .es-header-row span {
         text-transform: uppercase;
         letter-spacing: 1px;
+        font-size: 1.1rem;
     }
     
     .es-row { 
@@ -45,7 +46,6 @@ Cond="parse_ini_file('/boot/config/plugins/embystreams/embystreams.cfg')['DISPLA
         overflow: hidden !important;
         text-overflow: ellipsis !important;
         white-space: nowrap !important;
-        font-size: 1.1rem !important;
     }
 
     .es-device {
