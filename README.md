@@ -10,7 +10,7 @@ Please note that this plugin is **not** currently available in the Unraid Commun
 
 | Dashboard Widget | 
 | :--- |
-| ![Dashboard Example](https://raw.githubusercontent.com/gthrift/unraid-embystreams/master/metadata/dashboard_preview.png) | 
+| ![Dashboard Example](https://raw.githubusercontent.com/VGHOCIOT/unraid-embystreams/master/metadata/dashboard_preview.png) | 
 
 * **Dashboard Widget:** A native Unraid dashboard tile showing who is watching what, on which device, and the current playback status.
 * **Real-time Updates:** Configurable polling interval to keep the dashboard current.
@@ -24,7 +24,7 @@ Please note that this plugin is **not** currently available in the Unraid Commun
 3. Click on the **Install Plugin** sub-tab.
 4. Copy and paste the following URL into the box:
    ```text
-   https://raw.githubusercontent.com/gthrift/unraid-embystreams/main/embystreams.plg
+   https://raw.githubusercontent.com/VGHOCIOT/unraid-embystreams/main/embystreams.plg
 
 ## Disclaimer
 

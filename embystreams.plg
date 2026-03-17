@@ -1,10 +1,10 @@
 <?xml version='1.0' standalone='yes'?>
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "embystreams">
-<!ENTITY author    "gthrift">
+<!ENTITY author    "VGHOCIOT">
 <!ENTITY version   "2026.03.16">
 <!ENTITY launch    "Settings/EmbyStreamsSettings">
-<!ENTITY gitURL    "https://raw.githubusercontent.com/gthrift/unraid-embystreams/main">
+<!ENTITY gitURL    "https://raw.githubusercontent.com/VGHOCIOT/unraid-embystreams/main">
 <!ENTITY pluginURL "&gitURL;/embystreams.plg">
 <!ENTITY archive   "&gitURL;/archive/&name;-&version;.txz">
 <!ENTITY sha256    "b7c174eaf6fa90e65eb5707908dc75496c5a8dab0cba2d417f85691f2871d932">
@@ -17,9 +17,9 @@
         version="&version;" 
         launch="&launch;" 
         pluginURL="&pluginURL;" 
-        support="https://github.com/gthrift/unraid-embystreams/issues"
-        project="https://github.com/gthrift/unraid-embystreams/"
-        readme="https://github.com/gthrift/unraid-embystreams/#readme"
+        support="https://github.com/VGHOCIOT/unraid-embystreams/issues"
+        project="https://github.com/VGHOCIOT/unraid-embystreams/"
+        readme="https://github.com/VGHOCIOT/unraid-embystreams/#readme"
         icon="emby.png">
 
 <CHANGES>
