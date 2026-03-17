@@ -50,6 +50,17 @@ if ($sessions) {
             $active_streams[] = $session;
         }
     }
+    usort($active_streams, function($a, $b) {
+        return strcasecmp($a['UserName'] ?? '', $b['UserName'] ?? '');
+    });
+}
+
+// Helper: Strip screen sizes, "Google " prefix, and model codes from device names
+function cleanDeviceName($device) {
+    $device = preg_replace('/^\d+[\'\"]\s+/', '', $device);    // "32' RCA Roku TV" → "RCA Roku TV"
+    $device = preg_replace('/^Google\s+/i', '', $device);       // "Google Chrome" → "Chrome"
+    $device = preg_replace('/\s*\([^)]*\)\s*$/', '', $device);  // "Samsung TV (QN75QN1EFAGXPE)" → "Samsung TV"
+    return trim($device);
 }
 
 // Helper: Convert ticks (10,000,000 ticks = 1 second) to H:MM:SS or M:SS
@@ -69,25 +80,38 @@ function formatTicks($ticks) {
 if (empty($active_streams)) {
     echo "<div style='padding:15px; text-align:center; opacity:0.6; font-style:italic;'>No active streams</div>";
 } else {
+    $type_icons = [
+        'Movie'     => 'fa-film',
+        'Episode'   => 'fa-television',
+        'TvChannel' => 'fa-television',
+    ];
+
     foreach ($active_streams as $s) {
         $user = htmlspecialchars($s['UserName']);
         $episode_title = htmlspecialchars($s['NowPlayingItem']['Name']);
+        $item_type = $s['NowPlayingItem']['Type'] ?? '';
+        $type_icon = $type_icons[$item_type] ?? '';
 
-        // Build display title - for TV shows use: Show Name - SxxExx - Episode Name
+        // Build titles - full version for tooltip, short version for display
         if (isset($s['NowPlayingItem']['SeriesName'])) {
             $series = htmlspecialchars($s['NowPlayingItem']['SeriesName']);
             $season_num = isset($s['NowPlayingItem']['ParentIndexNumber']) ? intval($s['NowPlayingItem']['ParentIndexNumber']) : null;
             $episode_num = isset($s['NowPlayingItem']['IndexNumber']) ? intval($s['NowPlayingItem']['IndexNumber']) : null;
             if ($season_num !== null && $episode_num !== null) {
-                $title = $series . " - S" . str_pad($season_num, 2, '0', STR_PAD_LEFT) . "E" . str_pad($episode_num, 2, '0', STR_PAD_LEFT) . " - " . $episode_title;
+                $se = "S" . str_pad($season_num, 2, '0', STR_PAD_LEFT) . "E" . str_pad($episode_num, 2, '0', STR_PAD_LEFT);
+                $title = $series . " - " . $se . " - " . $episode_title;
+                $title_display = $series . " - " . $se;
             } else {
                 $title = $series . " - " . $episode_title;
+                $title_display = $series;
             }
         } else {
             $title = $episode_title;
+            $title_display = $episode_title;
         }
 
         $device = htmlspecialchars($s['DeviceName']);
+        $device_display = htmlspecialchars(cleanDeviceName($s['DeviceName']));
         $is_paused = (isset($s['PlayState']['IsPaused']) && $s['PlayState']['IsPaused']);
         $status_text = $is_paused ? "Paused" : "Playing";
         $status_color = $is_paused ? "#f0ad4e" : "#8cc43c";
@@ -95,10 +119,10 @@ if (empty($active_streams)) {
         $play_method = $s['PlayState']['PlayMethod'] ?? 'DirectPlay';
         $is_transcoding = ($play_method === 'Transcode');
 
-        // Build progress tooltip: [current timestamp] / [media length]
+        // Build progress text: [current timestamp] / [media length]
         $position_ticks = $s['PlayState']['PositionTicks'] ?? 0;
         $runtime_ticks = $s['NowPlayingItem']['RunTimeTicks'] ?? 0;
-        $progress_tooltip = formatTicks($position_ticks) . " / " . formatTicks($runtime_ticks);
+        $progress_text = formatTicks($position_ticks) . " / " . formatTicks($runtime_ticks);
 
         // Build transcoding details tooltip
         $transcode_tooltip = '';
@@ -140,13 +164,14 @@ if (empty($active_streams)) {
         echo "<div class='es-row'>";
 
         // Name
+        $icon_html = $type_icon ? "<i class='fa $type_icon' style='font-size:11px; margin-right:5px; opacity:0.7;'></i>" : '';
         echo "<span class='es-name' title='$title'>
-                $title
+                $icon_html$title_display
               </span>";
 
         // Device
         echo "<span class='es-device' title='$device'>
-                $device
+                $device_display
               </span>";
 
         // User (no icon)
@@ -155,12 +180,15 @@ if (empty($active_streams)) {
               </span>";
 
         // State
-        echo "<span class='es-state' style='color:$status_color; font-weight:bold; cursor:help;' title='$progress_tooltip'>";
+        echo "<span class='es-state' style='color:$status_color; font-weight:bold;'>";
         if ($is_transcoding) {
             echo "<i class='fa fa-random es-transcode' style='color:#e5a00d; font-size:11px;' title='$transcode_tooltip'></i> ";
         }
         echo "<i class='fa $status_icon' style='font-size:11px; margin-right:4px;'></i>$status_text";
         echo "</span>";
+
+        // Progress
+        echo "<span class='es-progress' title='$progress_text'>$progress_text</span>";
 
         echo "</div>";
     }
