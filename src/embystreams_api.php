@@ -92,7 +92,7 @@ if (empty($active_streams)) {
         $item_type = $s['NowPlayingItem']['Type'] ?? '';
         $type_icon = $type_icons[$item_type] ?? '';
 
-        // Build titles - full version for tooltip, short version for display
+        // Build display title
         if (isset($s['NowPlayingItem']['SeriesName'])) {
             $series = htmlspecialchars($s['NowPlayingItem']['SeriesName']);
             $season_num = isset($s['NowPlayingItem']['ParentIndexNumber']) ? intval($s['NowPlayingItem']['ParentIndexNumber']) : null;
@@ -100,14 +100,11 @@ if (empty($active_streams)) {
             if ($season_num !== null && $episode_num !== null) {
                 $se = "S" . str_pad($season_num, 2, '0', STR_PAD_LEFT) . "E" . str_pad($episode_num, 2, '0', STR_PAD_LEFT);
                 $title = $series . " - " . $se . " - " . $episode_title;
-                $title_display = $series . " - " . $se;
             } else {
                 $title = $series . " - " . $episode_title;
-                $title_display = $series;
             }
         } else {
             $title = $episode_title;
-            $title_display = $episode_title;
         }
 
         $device = htmlspecialchars($s['DeviceName']);
@@ -166,7 +163,7 @@ if (empty($active_streams)) {
         // Name
         $icon_html = $type_icon ? "<i class='fa $type_icon' style='font-size:11px; margin-right:5px; opacity:0.7;'></i>" : '';
         echo "<span class='es-name' title='$title'>
-                $icon_html$title_display
+                $icon_html$title
               </span>";
 
         // Device

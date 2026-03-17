@@ -1,5 +1,5 @@
 Menu="Utilities"
-Title="Emby Stream Settings"
+Title="Emby Streams"
 Icon="emby.png"
 ---
 <?php
@@ -35,7 +35,6 @@ $cfg = parse_ini_file($cfg_file);
 
 // Set Defaults
 if (!isset($cfg['DISPLAY_WIDGET'])) { $cfg['DISPLAY_WIDGET'] = "1"; }
-if (!isset($cfg['DISPLAY_NAV'])) { $cfg['DISPLAY_NAV'] = "1"; }
 if (!isset($cfg['HOST'])) { $cfg['HOST'] = ""; }
 if (!isset($cfg['PORT'])) { $cfg['PORT'] = "8096"; }
 if (!isset($cfg['API_KEY'])) { $cfg['API_KEY'] = ""; }
@@ -45,22 +44,6 @@ if (!isset($cfg['USE_HTTPS'])) { $cfg['USE_HTTPS'] = "0"; }
 // Validate and sanitize loaded config
 $cfg['PORT'] = max(1, min(65535, (int)$cfg['PORT']));
 $cfg['POLL_INTERVAL'] = max(1, min(60, (int)$cfg['POLL_INTERVAL']));
-
-// Secure plugin path handling
-$pluginPath = realpath('/usr/local/emhttp/plugins/embystreams/');
-if ($pluginPath === false || !is_dir($pluginPath)) {
-    echo "<div class='error-message'>Plugin directory not found. Please reinstall the plugin.</div>";
-    exit;
-}
-$pluginPath .= '/';
-
-// Logic to Hide/Show Tabs based on settings (Mirrors PlexStreams behavior)
-// 1. Toggle the Main Navigation Tab
-if ($cfg['DISPLAY_NAV'] === '0' && file_exists($pluginPath . 'Emby_Streams.page')) {
-    @rename($pluginPath . 'Emby_Streams.page', $pluginPath . 'Emby_Streams.page.off');
-} else if ($cfg['DISPLAY_NAV'] === '1' && file_exists($pluginPath . 'Emby_Streams.page.off')) {
-    @rename($pluginPath . 'Emby_Streams.page.off', $pluginPath . 'Emby_Streams.page');
-}
 
 // Get CSRF token
 $csrf_token = $_SESSION['embystreams_csrf'];
@@ -106,14 +89,6 @@ _(Show Dashboard Widget)_:
   </select>
 
 > _(Show the Emby Streams widget on the Unraid dashboard)_
-
-_(Show Navigation Tab)_:
-: <select name="DISPLAY_NAV">
-  <option value="1" <?php echo($cfg['DISPLAY_NAV'] === "1" ? "selected" : ""); ?>>_(Yes)_</option>
-  <option value="0" <?php echo($cfg['DISPLAY_NAV'] === "0" ? "selected" : ""); ?>>_(No)_</option>
-  </select>
-
-> _(Show the Emby Streams tab in the main navigation)_
 
 &nbsp;
 : <input type="submit" value="_(Apply)_"><input type="button" value="_(Done)_" onclick="done();">
