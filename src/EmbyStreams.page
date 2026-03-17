@@ -45,6 +45,7 @@ Cond="parse_ini_file('/boot/config/plugins/embystreams/embystreams.cfg')['DISPLA
         overflow: hidden !important;
         text-overflow: ellipsis !important;
         white-space: nowrap !important;
+        font-size: 1.1rem !important;
     }
 
     .es-device {
