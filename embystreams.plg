@@ -2,12 +2,12 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "embystreams">
 <!ENTITY author    "gthrift">
-<!ENTITY version   "2026.02.03">
+<!ENTITY version   "2026.03.16">
 <!ENTITY launch    "Settings/EmbyStreamsSettings">
 <!ENTITY gitURL    "https://raw.githubusercontent.com/gthrift/unraid-embystreams/main">
 <!ENTITY pluginURL "&gitURL;/embystreams.plg">
 <!ENTITY archive   "&gitURL;/archive/&name;-&version;.txz">
-<!ENTITY sha256    "e2b62f03598c568ed1f37e52413bf6c76d387b5559528a22b8fff1a9dee8b1d8">
+<!ENTITY sha256    "b7c174eaf6fa90e65eb5707908dc75496c5a8dab0cba2d417f85691f2871d932">
 <!ENTITY emhttp    "/usr/local/emhttp/plugins/&name;">
 <!ENTITY plgPATH   "/boot/config/plugins/&name;">
 ]>
@@ -23,6 +23,9 @@
         icon="emby.png">
 
 <CHANGES>
+###2026.03.16
+- Clean up styling and sorting of streams
+
 ###2026.02.03
 - Improved settings page formatting 
 - Additional transcoding detail in mouse over hint text
