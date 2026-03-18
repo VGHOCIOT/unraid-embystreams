@@ -15,7 +15,7 @@ Cond="parse_ini_file('/boot/config/plugins/embystreams/embystreams.cfg')['DISPLA
 ?>
 
 <style>
-    .emby-icon-img { width: 32px; height: 32px; align-self: center; vertical-align: middle; }
+    .emby-icon-img { width: 32px; height: 32px; align-self: center; vertical-align: middle; } 
 
     /* Base Row Styling */
     .es-row, .es-header-row {
@@ -35,6 +35,7 @@ Cond="parse_ini_file('/boot/config/plugins/embystreams/embystreams.cfg')['DISPLA
     .es-row { 
         border-bottom: 1px solid rgba(255,255,255,0.05); 
         padding: 4px 0; 
+        gap: 8px;
     }
     .es-row:last-child { border-bottom: none; }
     .es-transcode { font-size: 10px; opacity: 0.7; margin-left: 5px; }
@@ -88,7 +89,7 @@ Cond="parse_ini_file('/boot/config/plugins/embystreams/embystreams.cfg')['DISPLA
     /* --- MOBILE OVERRIDES (Max Width 600px) --- */
     @media only screen and (max-width: 600px) {
         
-        .es-device, .es-progress {
+        .es-device, .es-user, .es-progress {
             display: none !important;
         }
 
@@ -102,20 +103,11 @@ Cond="parse_ini_file('/boot/config/plugins/embystreams/embystreams.cfg')['DISPLA
             white-space: nowrap !important;
         }
 
-        /* USER: Compact fixed width */
-        .es-user {
-            flex: 0 0 auto !important;
-            max-width: 80px !important;
-            overflow: hidden !important;
-            text-overflow: ellipsis !important;
-            padding: 0 8px;
-            text-align: left !important;
-        }
-
         /* STATE: Compact on right */
         .es-state {
             flex: 0 0 auto !important;
-            text-align: right !important;
+            text-align: right;
+            padding-left: 10px;
         }
     }
 </style>
