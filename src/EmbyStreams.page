@@ -23,7 +23,6 @@ Cond="parse_ini_file('/boot/config/plugins/embystreams/embystreams.cfg')['DISPLA
         align-items: center;
         width: 100%;
         box-sizing: border-box;
-        gap: 8px;
     }
 
     .es-header-row span {
@@ -44,15 +43,14 @@ Cond="parse_ini_file('/boot/config/plugins/embystreams/embystreams.cfg')['DISPLA
     /* Using !important to force alignment over any Unraid defaults */
     
     .es-name {
-        flex: 1 1 auto !important;
-        min-width: 0 !important;
+        width: 35% !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
         white-space: nowrap !important;
     }
 
     .es-device {
-        flex: 0 0 17% !important;
+        width: 20% !important;
         text-align: left !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
@@ -60,7 +58,7 @@ Cond="parse_ini_file('/boot/config/plugins/embystreams/embystreams.cfg')['DISPLA
     }
 
     .es-user {
-        flex: 0 0 9% !important;
+        width: 13% !important;
         text-align: left !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
@@ -68,13 +66,13 @@ Cond="parse_ini_file('/boot/config/plugins/embystreams/embystreams.cfg')['DISPLA
     }
 
     .es-state {
-        flex: 0 0 auto !important;
+        width: 15% !important;
         text-align: right !important;
         white-space: nowrap !important;
     }
 
     .es-progress {
-        flex: 0 0 13% !important;
+        width: 17% !important;
         text-align: right !important;
         white-space: nowrap !important;
         overflow: hidden !important;
@@ -105,6 +103,7 @@ Cond="parse_ini_file('/boot/config/plugins/embystreams/embystreams.cfg')['DISPLA
 
         /* STATE: Compact on right */
         .es-state {
+            width: auto !important;
             flex: 0 0 auto !important;
             text-align: right;
             padding-left: 10px;
