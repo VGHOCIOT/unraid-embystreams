@@ -2,12 +2,12 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "embystreams">
 <!ENTITY author    "VGHOCIOT">
-<!ENTITY version   "2026.03.16">
+<!ENTITY version   "2026.03.17">
 <!ENTITY launch    "Settings/EmbyStreamsSettings">
 <!ENTITY gitURL    "https://raw.githubusercontent.com/VGHOCIOT/unraid-embystreams/main">
 <!ENTITY pluginURL "&gitURL;/embystreams.plg">
 <!ENTITY archive   "&gitURL;/archive/&name;-&version;.txz">
-<!ENTITY sha256    "94d0264fa10a15b781350525e02ed6b899bb451be4c65627edff6d723c2ec67c">
+<!ENTITY sha256    "9d50618144fb3278992e9f89842c753a0d46ae6a24d57bd1eb564c8b12c250ab">
 <!ENTITY emhttp    "/usr/local/emhttp/plugins/&name;">
 <!ENTITY plgPATH   "/boot/config/plugins/&name;">
 ]>
@@ -23,6 +23,9 @@
         icon="emby.png">
 
 <CHANGES>
+###2026.03.17
+- styling fixes
+
 ###2026.03.16
 - font title fix 2
 
